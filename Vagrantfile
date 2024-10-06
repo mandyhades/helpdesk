@@ -16,3 +16,17 @@ Vagrant.configure("2") do |config|
     echo "Oracle Database XE setup complete"
   SHELL
 end
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "oraclelinux/7"
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = "2048"
+    vb.cpus = 2
+  end
+
+  config.vm.provision "shell", inline: <<-SHELL
+    yum install -y oracle-database-preinstall-21c
+    yum install -y oracle-database-xe-21c
+    /etc/init.d/oracle-xe-21c configure
+  SHELL
+end
