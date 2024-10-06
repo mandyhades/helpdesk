@@ -17,5 +17,18 @@ Vagrant.configure("2") do |config|
   SHELL
 end
 
+#!/bin/bash
+
+# Download and install Oracle Database
+wget <oracle_database_download_url>
+sudo dpkg -i <oracle_database_file>
+
+# Configure Oracle Database (adjust as needed)
+sudo su - oracle
+sqlplus / as sysdba <<EOF
+CREATE USER <your_username> IDENTIFIED BY <your_password>;
+GRANT CONNECT, RESOURCE TO <your_username>;
+EOF
+exit
 
 
