@@ -17,16 +17,18 @@ Vagrant.configure("2") do |config|
   SHELL
 end
 
-Vagrant.configure("2") do |config|
-  config.vm.box = "oraclelinux/7"
-  config.vm.provider "virtualbox" do |vb|
-    vb.memory = "2048"
-    vb.cpus = 2
-  end
 
-  config.vm.provision "shell", inline: <<-SHELL
-    yum install -y oracle-database-preinstall-21c
-    yum install -y oracle-database-xe-21c
-    /etc/init.d/oracle-xe-21c configure
-  SHELL
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  # Specify the base box to use
+  config.vm.box = "ubuntu/focal64"  # Replace with your desired base box
+
+  # Configure the Oracle Database installation
+  config.vm.provision :shell do |s|
+    s.path = "install_oracle.sh"
+    s.args = ["<oracle_database_file>"]  # Replace with the path to your Oracle Database file
+  end
 end
+
