@@ -18,17 +18,4 @@ Vagrant.configure("2") do |config|
 end
 
 
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
-
-Vagrant.configure("2") do |config|
-  # Specify the base box to use
-  config.vm.box = "ubuntu/focal64"  # Replace with your desired base box
-
-  # Configure the Oracle Database installation
-  config.vm.provision :shell do |s|
-    s.path = "install_oracle.sh"
-    s.args = ["<oracle_database_file>"]  # Replace with the path to your Oracle Database file
-  end
-end
 
